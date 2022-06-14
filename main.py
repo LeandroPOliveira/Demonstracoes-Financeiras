@@ -6,7 +6,7 @@ wb = openpyxl.load_workbook('DF2.xlsx')  # Abrir arquivo com a base
 sheets = wb.sheetnames
 ws = wb['balancetes']
 
-data_usuario = '31/03/2022'
+data_usuario = '30/04/2022'
 
 data_cur = datetime.strptime(data_usuario, '%d/%m/%Y')
 
@@ -71,7 +71,7 @@ for index, row in razao.iterrows():
     elif row['Atribuição'] == '616.00.0.3.01.01' and ('ppr' in row['Texto'] or 'partic' in row['Texto']):
         lista2 = razao.loc[index, 'Montante em moeda interna']
         ppr2 += lista2
-    elif row['Atribuição'] == '631.00.0.5' and 'conta' in row['Texto']:
+    elif row['Atribuição'] == '631.00.0.5' and 'gráfica' in row['Texto'] or 'financeira' in row['Texto']:
         lista3 = razao.loc[index, 'Montante em moeda interna']
         outras_rec += lista3
     elif row['Atribuição'] == '631.00.0.5' and 'indébito' in row['Texto']:
@@ -99,7 +99,7 @@ for index, row in razao.iterrows():
     elif row['Atribuição'] == '652.00.0.1.01' and 'vag' in row['Texto']:
         lista_vag = razao.loc[index, 'Montante em moeda interna']
         vag += lista_vag
-    elif row['Atribuição'] == '651.00.0.1.01' and 'vag' in row['Texto']:
+    elif row['Atribuição'] == '651.00.0.1.01' and 'parcela' in row['Texto']:
         lista_vag2 = razao.loc[index, 'Montante em moeda interna']
         vag2 += lista_vag2
 
@@ -168,7 +168,7 @@ print(lista_plano50)
 # =====================================================================================================#
 
 dados = pd.read_excel(f'G:\GECOT\CONCILIAÇÕES CONTÁBEIS\CONCILIAÇÕES_2022\BALANCETES\SOCIETÁRIOS\\'
-                      f'Balancete 0{data_cur.month}2022 rev.02.xlsx', skiprows=12)
+                      f'Balancete 0{data_cur.month}2022.xlsx', skiprows=12)
 
 dados = pd.DataFrame(dados)
 
